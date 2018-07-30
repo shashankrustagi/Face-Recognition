@@ -1,8 +1,11 @@
 import numpy as np
 import cv2
 
+
+cv2.namedWindow("preview")
+
 # instantiate a camera object to capture images
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 
 # create a haar-cascade object for face detection
 face_cas = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
@@ -31,10 +34,10 @@ while True:
         for (x, y, w, h) in faces:
 
             # get the face component from the image frame
-			face_component = frame[y:y+h, x:x+w, :]
+	    face_component = frame[y:y+h, x:x+w, :]
 
             # resize the face image to 50X50X3
-            fc = cv2.resize(face_component, (50, 50))
+            fc = cv2.resize(face_component, (50,50))
 
             # store the face data after every 10 frames
             # only if the number of entries is less than 20

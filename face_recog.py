@@ -1,30 +1,37 @@
 import numpy as np
 import cv2
 
+
 # instantiate the camera object and haar cascade
-cam = cv2.VideoCapture(1)
+
+cv2.namedWindow("preview")
+cam = cv2.VideoCapture(0)
+
+
+
+
 face_cas = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 
 # declare the type of font to be used on output window
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # load the data from the numpy matrices and convert to linear vectors
-f_01 = np.load('face_01.npy').reshape((20, 50*50*3))    # Prashant
-f_02=  np.load('face_02.npy').reshape((20, 50*50*3))    # Nil
+f_01 = np.load('face1.npy').reshape((20, 50*50*3))    # Shashank
+f_02=  np.load('face2.npy').reshape((20, 50*50*3))    # Nil
 
 print f_01.shape, f_02.shape
 
 # create a look-up dictionary
 names = {
-    0: 'Prashant',
+    0: 'Shashank',
     1: 'Nil',
 
 }
 
 # create a matrix to store the labels
 labels = np.zeros((40, 1))
-labels[:20, :] = 0.0    # first 20 for Prashant (0)
-labels[40, :] = 1.0 # next 20 for Nil (1)
+labels[:20,:]=0.0 # first 20 for Shashank (0)
+#labels[40,:]=1.0 # next 20 for Nil (1)
 
 # combine all info into one data array
 data = np.concatenate([f_01, f_02]) # (40, 7500)
